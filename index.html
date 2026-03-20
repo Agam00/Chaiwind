@@ -3,20 +3,116 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="chai-bg-yellow chai-p-20 chai-text-center">
-      <h1 class="chai-text-white chai-m-0">Welcome to chaiwind</h1>
-      <p class="chai-text-yellow chai-p-10">
-        This text is styled purely by chaiwind
-      </p>
-    </div>
-    <div
-      class="chai-bg-blue chai-m-20 chai-p-10 chai-border-solid chai-border-black"
-    >
-      <p class="chai-text-white">Multiple elements work perfectly</p>
-    </div>
+    <title>ChaiCast | Global Radio</title>
     <script src="cssEngine.js"></script>
+    <style>
+      /* Base reset since we aren't loading a full CSS file */
+      body {
+        margin: 0;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body
+    class="chai-bg-#0f172a chai-text-white chai-min-h-screen chai-flex chai-flex-col"
+  >
+    <nav
+      class="chai-flex chai-justify-space-between chai-items-center chai-px-40 chai-py-20 chai-border-b chai-border-#1e293b chai-bg-#0f172a chai-sticky"
+    >
+      <div class="chai-flex chai-items-center chai-gap-10">
+        <div
+          class="chai-w-40 chai-h-40 chai-bg-#3b82f6 chai-rounded-full chai-flex chai-items-center chai-justify-center chai-bold chai-text-xl"
+        >
+          📻
+        </div>
+        <div class="chai-text-2xl chai-bold chai-tracking-1">ChaiCast</div>
+      </div>
+      <div class="chai-flex chai-gap-30 chai-text-base chai-semibold">
+        <a class="chai-text-#94a3b8 chai-pointer">Stations</a>
+        <a class="chai-text-#94a3b8 chai-pointer">Podcasts</a>
+        <a class="chai-text-#94a3b8 chai-pointer">Creators</a>
+      </div>
+      <button
+        class="chai-bg-#3b82f6 chai-text-white chai-px-24 chai-py-10 chai-rounded-full chai-bold chai-pointer chai-shadow-lg"
+      >
+        Start Listening
+      </button>
+    </nav>
+
+    <main
+      class="chai-flex-col chai-items-center chai-justify-center chai-text-center chai-px-20 chai-py-80 chai-flex"
+    >
+      <div class="chai-max-w-800 chai-mx-auto">
+        <h1 class="chai-text-5xl chai-bold chai-leading-1.2 chai-mb-20">
+          Broadcast Your Voice to the World
+        </h1>
+        <p class="chai-text-xl chai-text-#94a3b8 chai-mb-40 chai-px-40">
+          The ultimate platform for modern radio streams. Deploy your station,
+          manage audio files, and connect with listeners instantly.
+        </p>
+
+        <div class="chai-flex chai-justify-center chai-gap-20">
+          <button
+            class="chai-bg-#3b82f6 chai-text-white chai-px-32 chai-py-16 chai-rounded-8 chai-bold chai-text-lg chai-pointer"
+          >
+            Create Station
+          </button>
+          <button
+            class="chai-bg-transparent chai-text-white chai-border chai-border-#3b82f6 chai-px-32 chai-py-16 chai-rounded-8 chai-bold chai-text-lg chai-pointer"
+          >
+            View Directory
+          </button>
+        </div>
+      </div>
+
+      <div
+        class="chai-grid chai-grid-cols-3 chai-gap-30 chai-max-w-1000 chai-mx-auto chai-mt-80 chai-text-left"
+      >
+        <div
+          class="chai-bg-#1e293b chai-p-30 chai-rounded-12 chai-border chai-border-#334155 chai-shadow-lg"
+        >
+          <div class="chai-text-3xl chai-mb-15">⚡</div>
+          <h3 class="chai-text-xl chai-bold chai-mb-10">Low Latency</h3>
+          <p class="chai-text-#94a3b8 chai-text-sm">
+            Experience crystal clear audio with global edge nodes ensuring
+            minimal delay for your listeners.
+          </p>
+        </div>
+        <div
+          class="chai-bg-#1e293b chai-p-30 chai-rounded-12 chai-border chai-border-#334155 chai-shadow-lg"
+        >
+          <div class="chai-text-3xl chai-mb-15">🎛️</div>
+          <h3 class="chai-text-xl chai-bold chai-mb-10">AutoDJ Support</h3>
+          <p class="chai-text-#94a3b8 chai-text-sm">
+            Upload your media library and let our intelligent scheduling system
+            keep the music playing 24/7.
+          </p>
+        </div>
+        <div
+          class="chai-bg-#1e293b chai-p-30 chai-rounded-12 chai-border chai-border-#334155 chai-shadow-lg"
+        >
+          <div class="chai-text-3xl chai-mb-15">📊</div>
+          <h3 class="chai-text-xl chai-bold chai-mb-10">Live Analytics</h3>
+          <p class="chai-text-#94a3b8 chai-text-sm">
+            Track your global audience in real-time. Know exactly who is tuning
+            in and from where.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <footer
+      class="chai-mt-auto chai-py-40 chai-border-t chai-border-#1e293b chai-text-center chai-text-#64748b"
+    >
+      <p class="chai-text-sm">
+        Powered by ChaiEngine. Running smooth at 60fps.
+      </p>
+    </footer>
   </body>
 </html>
