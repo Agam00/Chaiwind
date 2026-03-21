@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chaiwind | Documentation</title>
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="cssEngine.js"></script>
+    <style>
+      :root {
+        --primary: #10b981;
+        --secondary: #0ea5e9;
+        --dark-bg: #09090b;
+        --surface: #18181b;
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+      }
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background-color: var(--dark-bg);
+        color: var(--text-main);
+      }
+      h1, h2, h3, h4 {
+        font-family: 'Outfit', sans-serif;
+      }
+      code, pre {
+        font-family: 'JetBrains Mono', monospace;
+        color: #10b981;
+      }
+      * {
+        box-sizing: border-box;
+      }
+
+      .text-gradient {
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .nav-link {
+        transition: color 0.3s ease;
+        text-decoration: none;
+      }
+      .nav-link:hover {
+        color: #10b981 !important;
+        text-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 16px;
+      }
+      th, td {
+        padding: 12px 16px;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      th {
+        color: #f8fafc;
+        font-weight: 600;
+      }
+      td {
+        color: #94a3b8;
+      }
+      td code {
+        background: rgba(16, 185, 129, 0.1);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 13px;
+      }
+      .chai-glass-card {
+        background: rgba(30, 41, 59, 0.4);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      }
+      .hover-row:hover {
+        background: rgba(255, 255, 255, 0.02);
+      }
+    </style>
+  </head>
+  <body class="chai-min-h-screen chai-flex chai-flex-col">
+
+    <nav class="chai-flex chai-justify-space-between chai-items-center chai-px-40 chai-py-20 chai-sticky chai-top-0 chai-z-50 chai-glass chai-border-b chai-border-rgba(255,255,255,0.05)">
+      <a href="index.html" class="chai-flex chai-items-center chai-gap-12 chai-pointer nav-link">
+        <div class="chai-text-4xl text-gradient">🍃</div>
+        <div class="chai-text-2xl chai-bold chai-tracking-1 chai-text-white">Chaiwind <span class="chai-text-sm chai-font-mono chai-text-#10b981">Docs</span></div>
+      </a>
+      <div class="chai-flex chai-gap-40 chai-text-sm chai-semibold">
+        <a href="index.html" class="chai-text-#94a3b8 nav-link">Home & Playground</a>
+        <a href="https://github.com/Agam00/Chaiwind.git" target="_blank" class="chai-text-#94a3b8 nav-link">GitHub</a>
+      </div>
+    </nav>
+
+    <main class="chai-max-w-1000 chai-mx-auto chai-w-full chai-px-20 chai-py-80">
+      
+      <div class="chai-mb-40">
+        <h1 class="chai-text-5xl chai-bold chai-text-white chai-mb-16">Documentation.</h1>
+        <p class="chai-text-lg chai-text-#94a3b8 chai-leading-1.6">
+          Everything you need to know about the Chaiwind runtime CSS engine. Drop in `<script src="cssEngine.js"></script>` and use these utility classes dynamically without any bundler configuration.
+        </p>
+      </div>
+
+      <!-- Typography -->
+      <div class="chai-glass-card chai-rounded-16 chai-p-32 chai-mb-40">
+        <h2 class="chai-text-2xl chai-bold chai-text-white chai-mb-8">Typography & Text</h2>
+        <p class="chai-text-sm chai-text-#94a3b8 chai-mb-20">Controls for font sizing, coloring, weight, and general text aesthetics.</p>
+        
+        <table class="chai-w-full">
+          <thead>
+            <tr>
+              <th>Class Pattern</th>
+              <th>CSS Effect</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover-row">
+              <td><code>chai-text-[color]</code></td>
+              <td><code>color: [color]</code></td>
+              <td><code>chai-text-#10b981</code>, <code>chai-text-white</code>, <code>chai-text-rgba(255,255,255,0.5)</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-text-[size]</code></td>
+              <td><code>font-size</code> predefined scale</td>
+              <td><code>chai-text-sm</code>, <code>chai-text-3xl</code>, up to <code>chai-text-7xl</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-text-[align]</code></td>
+              <td><code>text-align: [align]</code></td>
+              <td><code>chai-text-center</code>, <code>chai-text-right</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-font-[family]</code></td>
+              <td><code>font-family: [family]</code></td>
+              <td><code>chai-font-sans</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-bold</code></td>
+              <td><code>font-weight: bold</code></td>
+              <td><code>chai-bold</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-italic</code></td>
+              <td><code>font-style: italic</code></td>
+              <td><code>chai-italic</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-tracking-[val]</code></td>
+              <td><code>letter-spacing: [val]px</code></td>
+              <td><code>chai-tracking-2</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-leading-[val]</code></td>
+              <td><code>line-height: [val]</code></td>
+              <td><code>chai-leading-1.5</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Colors & Backgrounds -->
+      <div class="chai-glass-card chai-rounded-16 chai-p-32 chai-mb-40">
+        <h2 class="chai-text-2xl chai-bold chai-text-white chai-mb-8">Colors & Backgrounds</h2>
+        
+        <table class="chai-w-full">
+          <thead>
+            <tr>
+              <th>Class Pattern</th>
+              <th>CSS Effect</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover-row">
+              <td><code>chai-bg-[color]</code></td>
+              <td><code>background-color: [color]</code></td>
+              <td><code>chai-bg-#0f172a</code>, <code>chai-bg-transparent</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-opacity-[val]</code></td>
+              <td><code>opacity: [val/100]</code></td>
+              <td><code>chai-opacity-50</code> (translates to 0.5)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Spacing -->
+      <div class="chai-glass-card chai-rounded-16 chai-p-32 chai-mb-40">
+        <h2 class="chai-text-2xl chai-bold chai-text-white chai-mb-8">Spacing (Padding & Margin)</h2>
+        <p class="chai-text-sm chai-text-#94a3b8 chai-mb-20">Numeric values are safely converted to pixel dimensions directly.</p>
+        
+        <table class="chai-w-full">
+          <thead>
+            <tr>
+              <th>Class Pattern</th>
+              <th>Target Property</th>
+              <th>Supported Sides</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover-row">
+              <td><code>chai-p-[val]</code></td>
+              <td>Padding</td>
+              <td>All Sides</td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-px-[val]</code>, <code>chai-py-[val]</code></td>
+              <td>Padding</td>
+              <td>Left/Right (x) or Top/Bottom (y)</td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-pt-[val]</code>, <code>pr</code>, <code>pb</code>, <code>pl</code></td>
+              <td>Padding</td>
+              <td>Top, Right, Bottom, Left respectively</td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-m-[val]</code></td>
+              <td>Margin</td>
+              <td>All Sides</td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-mx-[val]</code>, <code>chai-my-[val]</code></td>
+              <td>Margin</td>
+              <td>Left/Right or Top/Bottom (e.g., <code>chai-mx-auto</code>)</td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-mt-[val]</code>, <code>mr</code>, <code>mb</code>, <code>ml</code></td>
+              <td>Margin</td>
+              <td>Top, Right, Bottom, Left respectively</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Layout & Dimensions -->
+      <div class="chai-glass-card chai-rounded-16 chai-p-32 chai-mb-40">
+        <h2 class="chai-text-2xl chai-bold chai-text-white chai-mb-8">Layout & Sizing</h2>
+        
+        <table class="chai-w-full">
+          <thead>
+            <tr>
+              <th>Class Pattern</th>
+              <th>CSS Effect</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover-row">
+              <td><code>chai-w-[val]</code>, <code>chai-h-[val]</code></td>
+              <td><code>width</code> / <code>height</code></td>
+              <td>Accepts <code>full</code> (100%), <code>screen</code> (100vh/vw), or px value.</td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-max-w-[val]</code>, <code>chai-min-h-[val]</code></td>
+              <td><code>max-width</code> / <code>min-height</code></td>
+              <td><code>chai-min-h-screen</code>, <code>chai-min-h-800</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-flex</code>, <code>chai-grid</code></td>
+              <td><code>display: flex</code> / <code>grid</code></td>
+              <td>-</td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-absolute</code>, <code>chai-fixed</code></td>
+              <td><code>position</code></td>
+              <td>Also supports <code>relative</code>, <code>sticky</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-top-[val]</code>, <code>bottom</code>, <code>left</code>, <code>right</code></td>
+              <td>Placement coordinates</td>
+              <td><code>chai-top-0</code>, <code>chai-inset-0</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-z-[val]</code></td>
+              <td><code>z-index: [val]</code></td>
+              <td><code>chai-z-50</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Flexbox & Grid -->
+      <div class="chai-glass-card chai-rounded-16 chai-p-32 chai-mb-40">
+        <h2 class="chai-text-2xl chai-bold chai-text-white chai-mb-8">Flexbox & Grid Controls</h2>
+        
+        <table class="chai-w-full">
+          <thead>
+            <tr>
+              <th>Class Pattern</th>
+              <th>CSS Effect</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover-row">
+              <td><code>chai-flex-col</code>, <code>chai-flex-row</code></td>
+              <td><code>flex-direction</code></td>
+              <td><code>chai-flex-col</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-items-[val]</code></td>
+              <td><code>align-items: [val]</code></td>
+              <td><code>chai-items-center</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-justify-[val]</code></td>
+              <td><code>justify-content: [val]</code></td>
+              <td><code>chai-justify-space-between</code>, <code>chai-justify-center</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-gap-[val]</code></td>
+              <td><code>gap: [val]px</code></td>
+              <td><code>chai-gap-20</code></td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-grid-cols-[val]</code></td>
+              <td><code>grid-template-columns</code></td>
+              <td><code>chai-grid-cols-3</code> (creates 3 repeating dynamic columns)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Premium Effects -->
+      <div class="chai-glass-card chai-rounded-16 chai-p-32 chai-mb-40">
+        <h2 class="chai-text-2xl chai-bold chai-text-white chai-mb-8">Premium Styling & Borders</h2>
+        
+        <table class="chai-w-full">
+          <thead>
+            <tr>
+              <th>Class Pattern</th>
+              <th>CSS Effect</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover-row">
+              <td><code>chai-rounded-[val]</code></td>
+              <td><code>border-radius: [val]px</code>. Passing <code>full</code> creates 9999px pill shapes.</td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-border-[color|type]</code></td>
+              <td>Can apply <code>solid</code>, <code>dashed</code>, or coloring like <code>chai-border-#fff</code>.</td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-shadow-lg</code>, <code>chai-shadow</code></td>
+              <td>Drop shadow presets.</td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-backdrop-blur-[val]</code></td>
+              <td>Applies glassmorphism blur filtering behind element.</td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-glass</code>, <code>chai-glass-card</code></td>
+              <td>Applies premium semi-transparent frosted glass design instantly.</td>
+            </tr>
+            <tr class="hover-row">
+              <td><code>chai-text-gradient</code></td>
+              <td>Clips a vibrant gradient uniquely across the text directly.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+
+    <footer class="chai-mt-auto chai-py-40 chai-border-t chai-border-rgba(255,255,255,0.05) chai-text-center chai-text-#64748b chai-glass">
+      <p class="chai-text-sm chai-flex chai-items-center chai-justify-center chai-gap-10">
+        Engineered with 🍃 by <strong class="chai-text-white">Chaiwind Engine</strong>.
+      </p>
+    </footer>
+
+  </body>
+</html>

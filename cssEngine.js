@@ -25,6 +25,8 @@ class ChaiEngine {
           "3xl": "30px",
           "4xl": "36px",
           "5xl": "48px",
+          "6xl": "64px",
+          "7xl": "80px",
         };
         if (sizes[value]) return { fontSize: sizes[value] };
 
@@ -39,6 +41,12 @@ class ChaiEngine {
       leading: (value) => ({ lineHeight: value }),
 
       // 📦 Spacing (Padding & Margin)
+      top: (value) => ({ top: pxOrStr(value) }),
+      bottom: (value) => ({ bottom: pxOrStr(value) }),
+      left: (value) => ({ left: pxOrStr(value) }),
+      right: (value) => ({ right: pxOrStr(value) }),
+      inset: (value) => ({ inset: pxOrStr(value) }),
+
       p: (value) => ({ padding: pxOrStr(value) }),
       px: (value) => ({
         paddingLeft: pxOrStr(value),
@@ -79,7 +87,11 @@ class ChaiEngine {
         return { height: pxOrStr(value) };
       },
       "max-w": (value) => ({ maxWidth: pxOrStr(value) }),
-      "min-h": (value) => ({ minHeight: pxOrStr(value) }),
+      "min-h": (value) => {
+        if (value === "full") return { minHeight: "100%" };
+        if (value === "screen") return { minHeight: "100vh" };
+        return { minHeight: pxOrStr(value) };
+      },
 
       // 🧱 Display & Position
       flex: () => ({ display: "flex" }),
@@ -128,6 +140,32 @@ class ChaiEngine {
       },
 
       // 🌫️ Effects & Misc
+      "backdrop-blur": (value) => {
+        const sizes = { sm: "4px", md: "12px", lg: "24px", xl: "40px" };
+        return { backdropFilter: `blur(${sizes[value] || value || "8px"})`, WebkitBackdropFilter: `blur(${sizes[value] || value || "8px"})` };
+      },
+      "filter-blur": (value) => ({ filter: `blur(${pxOrStr(value) || "8px"})` }),
+      glass: () => ({
+        background: "rgba(15, 23, 42, 0.6)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        border: "1px solid rgba(255, 255, 255, 0.08)"
+      }),
+      "glass-card": () => ({
+        background: "rgba(30, 41, 59, 0.4)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        border: "1px solid rgba(255, 255, 255, 0.1)",
+        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)"
+      }),
+      "text-gradient": () => ({
+        background: "linear-gradient(to right, #60a5fa, #a855f7)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        backgroundClip: "text",
+        color: "transparent"
+      }),
+
       shadow: (value) => {
         if (value === "lg")
           return {

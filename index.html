@@ -3,116 +3,327 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChaiCast | Global Radio</title>
+    <meta name="description" content="Chaiwind is a zero-build, rapid styling CSS-in-JS utility engine." />
+    <title>Chaiwind | The Runtime CSS Engine</title>
+    <!-- Modern Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="cssEngine.js"></script>
     <style>
-      /* Base reset since we aren't loading a full CSS file */
+      :root {
+        --primary: #10b981; /* Emerald */
+        --secondary: #0ea5e9; /* Sky blue */
+        --dark-bg: #09090b;
+        --surface: #18181b;
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+      }
       body {
         margin: 0;
-        font-family:
-          system-ui,
-          -apple-system,
-          sans-serif;
+        font-family: 'Inter', sans-serif;
+        background-color: var(--dark-bg);
+        color: var(--text-main);
+        overflow-x: hidden;
+      }
+      h1, h2, h3, h4 {
+        font-family: 'Outfit', sans-serif;
+      }
+      code, pre, input, textarea {
+        font-family: 'JetBrains Mono', monospace;
       }
       * {
         box-sizing: border-box;
       }
+
+      /* Base layout components */
+      .chai-glass-card {
+        background: rgba(30, 41, 59, 0.4);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      }
+
+      .text-gradient {
+        background: linear-gradient(to right, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Hover Effects & Animations */
+      .nav-link {
+        transition: color 0.3s ease;
+        text-decoration: none;
+      }
+      .nav-link:hover {
+        color: #10b981 !important;
+        text-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+      }
+      
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.5);
+      }
+
+      .btn-outline {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+      .btn-outline:hover {
+        background: rgba(16, 185, 129, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px -5px rgba(16, 185, 129, 0.3);
+      }
+
+      .feature-card {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+      }
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+        border-color: rgba(16, 185, 129, 0.4) !important;
+      }
+
+      /* Subtle Glow Background */
+      .bg-glow {
+        position: absolute;
+        width: 800px;
+        height: 800px;
+        background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, rgba(0,0,0,0) 70%);
+        top: -200px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-up {
+        animation: fadeUp 1s ease-out forwards;
+        opacity: 0;
+      }
+      .delay-1 { animation-delay: 0.2s; }
+      .delay-2 { animation-delay: 0.4s; }
+      
+      /* Playground Specific */
+      .playground-input {
+        width: 100%;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #e2e8f0;
+        padding: 16px 20px;
+        border-radius: 12px;
+        font-size: 15px;
+        outline: none;
+        resize: vertical;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+      .playground-input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+      }
+      .checkerboard {
+        background-color: #0f172a;
+        background-image: linear-gradient(45deg, #1e293b 25%, transparent 25%),
+          linear-gradient(-45deg, #1e293b 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, #1e293b 75%),
+          linear-gradient(-45deg, transparent 75%, #1e293b 75%);
+        background-size: 20px 20px;
+        background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .hover-code {
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+      .hover-code:hover {
+        transform: scale(1.05);
+        background: rgba(16, 185, 129, 0.2);
+        color: white;
+      }
     </style>
   </head>
-  <body
-    class="chai-bg-#0f172a chai-text-white chai-min-h-screen chai-flex chai-flex-col"
-  >
-    <nav
-      class="chai-flex chai-justify-space-between chai-items-center chai-px-40 chai-py-20 chai-border-b chai-border-#1e293b chai-bg-#0f172a chai-sticky"
-    >
-      <div class="chai-flex chai-items-center chai-gap-10">
-        <div
-          class="chai-w-40 chai-h-40 chai-bg-#3b82f6 chai-rounded-full chai-flex chai-items-center chai-justify-center chai-bold chai-text-xl"
-        >
-          📻
-        </div>
-        <div class="chai-text-2xl chai-bold chai-tracking-1">ChaiCast</div>
+  <body class="chai-min-h-screen chai-flex chai-flex-col chai-relative">
+    <div class="bg-glow"></div>
+    
+    <nav class="chai-flex chai-justify-space-between chai-items-center chai-px-40 chai-py-20 chai-sticky chai-top-0 chai-z-50 chai-glass chai-border-b chai-border-rgba(255,255,255,0.05)">
+      <div class="chai-flex chai-items-center chai-gap-12 chai-pointer">
+        <div class="chai-text-4xl text-gradient">🍃</div>
+        <div class="chai-text-2xl chai-bold chai-tracking-1 chai-text-white">Chaiwind</div>
       </div>
-      <div class="chai-flex chai-gap-30 chai-text-base chai-semibold">
-        <a class="chai-text-#94a3b8 chai-pointer">Stations</a>
-        <a class="chai-text-#94a3b8 chai-pointer">Podcasts</a>
-        <a class="chai-text-#94a3b8 chai-pointer">Creators</a>
+      <div class="chai-flex chai-gap-40 chai-text-sm chai-semibold">
+        <a href="docs.html" class="chai-text-#94a3b8 nav-link">Documentation</a>
+        <a href="#playground" class="chai-text-#94a3b8 nav-link">Playground</a>
+        <a href="https://github.com/Agam00/Chaiwind.git" target="_blank" class="chai-text-#94a3b8 nav-link">GitHub</a>
       </div>
-      <button
-        class="chai-bg-#3b82f6 chai-text-white chai-px-24 chai-py-10 chai-rounded-full chai-bold chai-pointer chai-shadow-lg"
-      >
-        Start Listening
-      </button>
+      <a href="#playground" class="btn-primary chai-border-transparent chai-text-white chai-px-24 chai-py-10 chai-rounded-full chai-bold chai-text-sm chai-no-underline">
+        Try it Now
+      </a>
     </nav>
 
-    <main
-      class="chai-flex-col chai-items-center chai-justify-center chai-text-center chai-px-20 chai-py-80 chai-flex"
-    >
-      <div class="chai-max-w-800 chai-mx-auto">
-        <h1 class="chai-text-5xl chai-bold chai-leading-1.2 chai-mb-20">
-          Broadcast Your Voice to the World
+    <main class="chai-flex-col chai-items-center chai-justify-center chai-text-center chai-px-20 chai-pt-80 chai-pb-40 chai-flex chai-z-10">
+      <div class="chai-max-w-1000 chai-mx-auto animate-fade-up">
+        <div class="chai-inline-block chai-px-16 chai-py-6 chai-rounded-full chai-bg-rgba(16,185,129,0.1) chai-border chai-border-#10b981 chai-text-#10b981 chai-text-sm chai-semibold chai-mb-24">
+          ✨ v1.0.0 Now parsing at 60fps
+        </div>
+        <h1 class="chai-text-6xl chai-bold chai-leading-1.2 chai-mb-24 chai-text-white">
+          A Zero-Build, Intelligent <br />
+          <span class="text-gradient">Utility CSS Engine</span>
         </h1>
-        <p class="chai-text-xl chai-text-#94a3b8 chai-mb-40 chai-px-40">
-          The ultimate platform for modern radio streams. Deploy your station,
-          manage audio files, and connect with listeners instantly.
+        <p class="chai-text-xl chai-text-#94a3b8 chai-mb-40 chai-px-40 chai-leading-1.6 chai-max-w-800 chai-mx-auto">
+          Chaiwind parses your utility classes in the browser and injects styles dynamically on runtime. No build steps, no webpack plugins—just pure vanilla JavaScript magic.
         </p>
 
-        <div class="chai-flex chai-justify-center chai-gap-20">
-          <button
-            class="chai-bg-#3b82f6 chai-text-white chai-px-32 chai-py-16 chai-rounded-8 chai-bold chai-text-lg chai-pointer"
-          >
-            Create Station
-          </button>
-          <button
-            class="chai-bg-transparent chai-text-white chai-border chai-border-#3b82f6 chai-px-32 chai-py-16 chai-rounded-8 chai-bold chai-text-lg chai-pointer"
-          >
-            View Directory
+        <div class="chai-flex chai-justify-center chai-gap-24 animate-fade-up delay-1">
+          <a href="#playground" class="btn-primary chai-text-white chai-px-36 chai-py-18 chai-rounded-12 chai-semibold chai-text-base chai-pointer chai-flex chai-items-center chai-no-underline">
+            Test the Playground
+          </a>
+          <button class="btn-outline chai-bg-transparent chai-text-white chai-border chai-border-rgba(255,255,255,0.2) chai-px-36 chai-py-18 chai-rounded-12 chai-semibold chai-text-base chai-pointer chai-flex chai-items-center chai-gap-10">
+            <span>&lt;/&gt;</span> View Source
           </button>
         </div>
       </div>
 
-      <div
-        class="chai-grid chai-grid-cols-3 chai-gap-30 chai-max-w-1000 chai-mx-auto chai-mt-80 chai-text-left"
-      >
-        <div
-          class="chai-bg-#1e293b chai-p-30 chai-rounded-12 chai-border chai-border-#334155 chai-shadow-lg"
-        >
-          <div class="chai-text-3xl chai-mb-15">⚡</div>
-          <h3 class="chai-text-xl chai-bold chai-mb-10">Low Latency</h3>
-          <p class="chai-text-#94a3b8 chai-text-sm">
-            Experience crystal clear audio with global edge nodes ensuring
-            minimal delay for your listeners.
+      <div class="chai-grid chai-grid-cols-3 chai-gap-30 chai-max-w-1100 chai-mx-auto chai-mt-80 chai-mb-80 chai-text-left animate-fade-up delay-2">
+        <div class="feature-card chai-glass-card chai-p-40 chai-rounded-24 chai-relative chai-overflow-hidden">
+          <div class="chai-absolute chai-top-0 chai-right-0 chai-w-100 chai-h-100 chai-bg-#10b981 chai-opacity-10 chai-rounded-full chai-filter-blur-24" style="transform: translate(30%, -30%); filter: blur(30px);"></div>
+          <div class="chai-w-50 chai-h-50 chai-rounded-12 chai-bg-rgba(255,255,255,0.05) chai-flex chai-items-center chai-justify-center chai-text-2xl chai-mb-24">
+            🚀
+          </div>
+          <h3 class="chai-text-2xl chai-bold chai-mb-12 chai-text-white">Zero Build Config</h3>
+          <p class="chai-text-#94a3b8 chai-text-base chai-leading-1.6">
+            Simply link the lightweight JS file. Chaiwind automatically scans classes and parses rules perfectly on DOMContentLoaded.
           </p>
         </div>
-        <div
-          class="chai-bg-#1e293b chai-p-30 chai-rounded-12 chai-border chai-border-#334155 chai-shadow-lg"
-        >
-          <div class="chai-text-3xl chai-mb-15">🎛️</div>
-          <h3 class="chai-text-xl chai-bold chai-mb-10">AutoDJ Support</h3>
-          <p class="chai-text-#94a3b8 chai-text-sm">
-            Upload your media library and let our intelligent scheduling system
-            keep the music playing 24/7.
+
+        <div class="feature-card chai-glass-card chai-p-40 chai-rounded-24 chai-relative chai-overflow-hidden">
+          <div class="chai-absolute chai-top-0 chai-right-0 chai-w-100 chai-h-100 chai-bg-#0ea5e9 chai-opacity-10 chai-rounded-full chai-filter-blur-24" style="transform: translate(30%, -30%); filter: blur(30px);"></div>
+          <div class="chai-w-50 chai-h-50 chai-rounded-12 chai-bg-rgba(255,255,255,0.05) chai-flex chai-items-center chai-justify-center chai-text-2xl chai-mb-24">
+            🎨
+          </div>
+          <h3 class="chai-text-2xl chai-bold chai-mb-12 chai-text-white">Arbitrary Values</h3>
+          <p class="chai-text-#94a3b8 chai-text-base chai-leading-1.6">
+            Pass exact values directly in the class like <code class="chai-text-xs">chai-bg-#18181b</code> or <code class="chai-text-xs">chai-p-40</code> to gain total control over design specifications.
           </p>
         </div>
-        <div
-          class="chai-bg-#1e293b chai-p-30 chai-rounded-12 chai-border chai-border-#334155 chai-shadow-lg"
-        >
-          <div class="chai-text-3xl chai-mb-15">📊</div>
-          <h3 class="chai-text-xl chai-bold chai-mb-10">Live Analytics</h3>
-          <p class="chai-text-#94a3b8 chai-text-sm">
-            Track your global audience in real-time. Know exactly who is tuning
-            in and from where.
+
+        <div class="feature-card chai-glass-card chai-p-40 chai-rounded-24 chai-relative chai-overflow-hidden">
+          <div class="chai-absolute chai-top-0 chai-right-0 chai-w-100 chai-h-100 chai-bg-#a855f7 chai-opacity-10 chai-rounded-full chai-filter-blur-24" style="transform: translate(30%, -30%); filter: blur(30px);"></div>
+          <div class="chai-w-50 chai-h-50 chai-rounded-12 chai-bg-rgba(255,255,255,0.05) chai-flex chai-items-center chai-justify-center chai-text-2xl chai-mb-24">
+            🧩
+          </div>
+          <h3 class="chai-text-2xl chai-bold chai-mb-12 chai-text-white">Extensible Rules</h3>
+          <p class="chai-text-#94a3b8 chai-text-base chai-leading-1.6">
+            Add custom effects, gradients, and custom themes effortlessly by extending the <code>this.rules</code> object inside the engine.
           </p>
+        </div>
+      </div>
+
+      <!-- Live Playground Section -->
+      <div id="playground" class="chai-w-full chai-max-w-1100 chai-mx-auto chai-mt-40 chai-text-left chai-border-t chai-border-rgba(255,255,255,0.05) chai-pt-80">
+        <div class="chai-flex chai-flex-col chai-items-center chai-text-center chai-mb-40">
+          <div class="chai-text-4xl chai-mb-15">🎮</div>
+          <h2 class="chai-text-4xl chai-bold chai-text-white chai-mb-20">Interactive Playground</h2>
+          <p class="chai-text-lg chai-text-#94a3b8 chai-max-w-600 chai-leading-1.6">
+            Type Chaiwind classes below to witness realtime parsing and styling injection. Mix and match layouts, typography, and premium effects.
+          </p>
+        </div>
+
+        <div class="chai-grid chai-grid-cols-2 chai-gap-40">
+          <div class="chai-flex chai-flex-col">
+            <label class="chai-text-sm chai-bold chai-text-white chai-mb-12 chai-uppercase chai-tracking-1">Classes Editor</label>
+            <textarea id="playgroundInput" class="playground-input" rows="7" spellcheck="false" placeholder="Enter classes starting with chai-...">chai-w-200 chai-h-200 chai-flex chai-items-center chai-justify-center chai-text-white chai-bold chai-text-3xl chai-rounded-24 chai-glass-card chai-shadow-lg chai-pointer</textarea>
+            
+            <div class="chai-mt-24 chai-p-24 chai-rounded-16 chai-glass-card chai-border chai-border-rgba(255,255,255,0.05)">
+              <p class="chai-text-sm chai-text-#94a3b8 chai-bold chai-mb-12">Click to append to editor:</p>
+              <div class="chai-flex chai-flex-wrap chai-gap-10">
+                <code class="chai-text-xs chai-bg-rgba(255,255,255,0.1) chai-px-10 chai-py-6 chai-rounded-6 chai-pointer hover-code">chai-bg-#10b981</code>
+                <code class="chai-text-xs chai-bg-rgba(255,255,255,0.1) chai-px-10 chai-py-6 chai-rounded-6 chai-pointer hover-code">chai-rounded-full</code>
+                <code class="chai-text-xs chai-bg-rgba(255,255,255,0.1) chai-px-10 chai-py-6 chai-rounded-6 chai-pointer hover-code">chai-shadow-lg</code>
+                <code class="chai-text-xs chai-bg-rgba(255,255,255,0.1) chai-px-10 chai-py-6 chai-rounded-6 chai-pointer hover-code">chai-text-gradient</code>
+                <code class="chai-text-xs chai-bg-rgba(255,255,255,0.1) chai-px-10 chai-py-6 chai-rounded-6 chai-pointer hover-code">chai-border-red</code>
+                <code class="chai-text-xs chai-bg-rgba(255,255,255,0.1) chai-px-10 chai-py-6 chai-rounded-6 chai-pointer hover-code">chai-text-6xl</code>
+                <code class="chai-text-xs chai-bg-rgba(255,255,255,0.1) chai-px-10 chai-py-6 chai-rounded-6 chai-pointer hover-code">chai-flex-col</code>
+                <code class="chai-text-xs chai-bg-rgba(255,255,255,0.1) chai-px-10 chai-py-6 chai-rounded-6 chai-pointer hover-code">chai-gap-20</code>
+                <code class="chai-text-xs chai-bg-rgba(255,255,255,0.1) chai-px-10 chai-py-6 chai-rounded-6 chai-pointer hover-code">chai-glass</code>
+                <code class="chai-text-xs chai-bg-rgba(255,255,255,0.1) chai-px-10 chai-py-6 chai-rounded-6 chai-pointer hover-code">chai-opacity-50</code>
+              </div>
+            </div>
+          </div>
+
+          <div class="chai-flex chai-flex-col">
+            <label class="chai-text-sm chai-bold chai-text-white chai-mb-12 chai-uppercase chai-tracking-1">Live Output</label>
+            <div class="checkerboard chai-min-h-300 chai-h-full chai-w-full chai-flex chai-items-center chai-justify-center chai-p-40 chai-rounded-12">
+              <div id="previewBox">
+                Chaiwind
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
 
-    <footer
-      class="chai-mt-auto chai-py-40 chai-border-t chai-border-#1e293b chai-text-center chai-text-#64748b"
-    >
-      <p class="chai-text-sm">
-        Powered by ChaiEngine. Running smooth at 60fps.
+    <footer class="chai-mt-auto chai-py-40 chai-border-t chai-border-rgba(255,255,255,0.05) chai-text-center chai-text-#64748b chai-glass chai-mt-80">
+      <p class="chai-text-sm chai-flex chai-items-center chai-justify-center chai-gap-10">
+        Engineered with 🍃 by <strong class="chai-text-white">Chaiwind Engine</strong>.
       </p>
     </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Create an isolated engine instance for the playground logic
+        const playgroundEngine = new ChaiEngine();
+        
+        const input = document.getElementById("playgroundInput");
+        const previewBox = document.getElementById("previewBox");
+        const hoverCodes = document.querySelectorAll('.hover-code');
+
+        function updatePreview() {
+            // Reset styles completely
+            previewBox.style = "";
+            previewBox.className = ""; // clear old classes if any
+            previewBox.style.transition = "all 0.3s ease";
+
+            // Parse classes dynamically
+            const rawValue = input.value;
+            const classes = rawValue.split(/\s+/).filter(c => c.startsWith("chai-"));
+
+            classes.forEach(className => {
+                const styleObj = playgroundEngine.parseClass(className);
+                if (styleObj) {
+                    Object.assign(previewBox.style, styleObj);
+                }
+            });
+        }
+
+        input.addEventListener("input", updatePreview);
+        
+        // Ensure clicking tokens appends dynamically
+        hoverCodes.forEach(code => {
+            code.addEventListener('click', () => {
+                input.value += (input.value.endsWith(" ") || input.value === "" ? "" : " ") + code.innerText;
+                updatePreview();
+                // pulse effect
+                code.style.transform = 'scale(1.1)';
+                setTimeout(() => code.style.transform = '', 150);
+            });
+        });
+
+        // Initialize preview on load
+        updatePreview();
+      });
+    </script>
   </body>
 </html>
